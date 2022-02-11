@@ -12,7 +12,7 @@ a different PackRGBA order.
 
 ---
 
-Copyright (c) 2012 - 2015 Matthäus G. "Anteru" Chajdas (http://anteru.net)
+Copyright (c) 2012 - 2022, Matthäus G. "Anteru" Chajdas (https://anteru.net)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in 
@@ -475,8 +475,8 @@ void DecompressBlockBC5 (uint32_t x, uint32_t y, uint32_t stride, enum BC5Mode m
 
 	for (dy = 0; dy < 4; ++dy) {
 		for (dx = 0; dx < 4; ++dx) {
-			*(float*)(image + stride * y + (x + dx + 0) * sizeof (float) * 2) = c0 [dy * 4 + dx];
-			*(float*)(image + stride * y + (x + dx + 1) * sizeof (float) * 2) = c1 [dy * 4 + dx];
+			*(float*)(image + stride * (y + dy) + ((x + dx) * 2 + 0) * sizeof (float)) = c0 [dy * 4 + dx];
+			*(float*)(image + stride * (y + dy) + ((x + dx) * 2 + 1) * sizeof (float)) = c1 [dy * 4 + dx];
 		}
 	}
 }
