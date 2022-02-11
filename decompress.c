@@ -475,8 +475,12 @@ void DecompressBlockBC5 (uint32_t x, uint32_t y, uint32_t stride, enum BC5Mode m
 
 	for (dy = 0; dy < 4; ++dy) {
 		for (dx = 0; dx < 4; ++dx) {
-			*(float*)(image + stride * y + (x + dx + 0) * sizeof (float) * 2) = c0 [dy * 4 + dx];
-			*(float*)(image + stride * y + (x + dx + 1) * sizeof (float) * 2) = c1 [dy * 4 + dx];
+			int row = y + dy;
+			int column = x + dx;
+			int row_offset = row * stride;
+			int column_offset = column * sizeof(float) * 2;
+			*(float*)(image + row_offset + column_offset + 0)             = c0 [dy * 4 + dx];
+			*(float*)(image + row_offset + column_offset + sizeof(float)) = c1 [dy * 4 + dx];
 		}
 	}
 }
